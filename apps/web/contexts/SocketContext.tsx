@@ -5,26 +5,28 @@ import { io, Socket } from "socket.io-client";
 interface SocketProviderProps {
   children?: React.ReactNode;
 }
+ 
+type TSendMessage = (msg: string) => any;
 
 interface ISocketContext {
-  sendMessage: (msg: string) => any;
+  sendMessage: TSendMessage;
   messages: string[];
 }
 
 const SocketContext = React.createContext<ISocketContext | null>(null);
 
-export const useSocket = () => {
-  const state = useContext(SocketContext);
-  if (!state) throw new Error(`state is undefined`);
+export const useSocketContext = () => {
+  const context = useContext(SocketContext);
+  if (!context) throw new Error(`context is undefined`);
 
-  return state;
+  return context;
 };
 
 export const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
   const [socket, setSocket] = useState<Socket>();
   const [messages, setMessages] = useState<string[]>([]);
 
-  const sendMessage: ISocketContext["sendMessage"] = useCallback(
+  const sendMessage: TSendMessage = useCallback(
     (msg) => {
       console.log("Send Message", msg);
       if (socket) {

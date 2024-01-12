@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
-import { useSocket } from "../context/SocketProvider";
+import { useSocketContext } from "../contexts/SocketContext";
 import classes from "./page.module.css";
 
 export default function Page() {
-  const { sendMessage, messages } = useSocket();
+  const { sendMessage, messages } = useSocketContext();
   const [message, setMessage] = useState("");
 
   return (
