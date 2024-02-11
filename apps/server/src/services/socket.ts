@@ -1,6 +1,8 @@
 import { Server as SocketIOServer, Socket } from 'socket.io';
 import http from 'http';
 import Redis from 'ioredis';
+import prismaClient from './prisma';
+import { produceMessage } from "./kafka";
 
 const pub = new Redis({
   host: 'localhost',
@@ -37,16 +39,18 @@ class SocketServer {
         });
         socket.on('event:message', async ({message}:{message:string}) => {
             console.log('message received: ' + message);
-            await pub.publish('MESSAGES', JSON.stringify({ message }));
+            // publish this message to redis
+            await pub.publish("MESSAGES", JSON.stringify({ message }));
         });
       });
 
-      sub.on("message", (channel, message) => {
+      sub.on("message", async (channel, message) => {
         if (channel !== "MESSAGES") return;
         console.log("new message from redis : " + message);
         io.emit('message', JSON.parse(message));
+        produceMessage(message);
       });
-    } 
+    }
 
     public getIo() {
         return this.io;

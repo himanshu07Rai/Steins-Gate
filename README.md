@@ -79,3 +79,18 @@ Learn more about the power of Turborepo:
 - [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
 - [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
 - [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+
+# Prisme
+
+- npm install prisma ts-node @types/node -D -w 'apps/server'
+- cd apps/server
+- npx prisma init --datasource-provider postgresql
+- update `DATABASE_URL` IN `.env`
+- create models in `schema.prisma` file
+- npx prisma migrate dev --name init
+
+
+# Postgres
+
+- psql -h localhost -U postgres
+- 
