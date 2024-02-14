@@ -2,7 +2,7 @@ import { Kafka, Producer } from 'kafkajs'
 import prismaClient from './prisma';
 
 const kafka = new Kafka({
-    brokers: ['localhost:9092']
+    brokers: ['localhost:29092']
 })
 
 let producer: null | Producer = null;

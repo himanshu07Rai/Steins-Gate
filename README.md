@@ -93,4 +93,5 @@ Learn more about the power of Turborepo:
 # Postgres
 
 - psql -h localhost -U postgres
-- 
+
+# Kafka
