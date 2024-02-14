@@ -95,3 +95,5 @@ Learn more about the power of Turborepo:
 - psql -h localhost -U postgres
 
 # Kafka
+
+- add brokers / servers
