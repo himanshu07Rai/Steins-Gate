@@ -1,5 +1,5 @@
 import { Kafka, Producer } from 'kafkajs'
-import pgClient from './db';
+import { messageDao } from '../daos/messageDao';
 
 const kafka = new Kafka({
     brokers: ['localhost:29092']
@@ -37,7 +37,7 @@ export async function produceMessage(message: string) {
         if (!message.value) return;
         console.log(`New Message Recv..`);
         try {
-          await pgClient.query('INSERT INTO message (text) VALUES ($1)', [message.value?.toString()]);
+          await messageDao.insertObj({ text: message.value?.toString() });
         } catch (err) {
           console.log(err,"Something is wrong");
           pause();
