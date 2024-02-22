@@ -1,6 +1,6 @@
 import ExpressConfig from "./express/express.config"
 import { startMessageConsumer } from "./services/kafka";
-import prismaClient from "./services/prisma";
+import pgClient from "./services/db";
 import SocketServer from "./services/socket";
 import express from "express"
 import http from "http"
@@ -23,8 +23,8 @@ const socketServer = new SocketServer(httpServer);
 socketServer.initListeners();
 startMessageConsumer();
 app.get('/api/messages', async (req, res) => {
-  const messages = await prismaClient.message.findMany();
-  res.json(messages);
+  const messages = await pgClient.query('SELECT * FROM message');
+  res.json(messages.rows);
 })
 
 httpServer.listen(httpPort, () => {
