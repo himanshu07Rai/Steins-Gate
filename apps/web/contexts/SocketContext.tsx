@@ -5,7 +5,7 @@ import { io, Socket } from "socket.io-client";
 interface SocketProviderProps {
   children?: React.ReactNode;
 }
- 
+
 type TSendMessage = (msg: string) => any;
 
 interface ISocketContext {
@@ -28,7 +28,6 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
 
   const sendMessage: TSendMessage = useCallback(
     (msg) => {
-      console.log("Send Message", msg);
       if (socket) {
         socket.emit("event:message", { message: msg });
       }
@@ -37,8 +36,8 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
   );
 
   const onMessageRec = useCallback((msg: string) => {
-    console.log("From Server Msg Rec", msg);
-    const { message } = msg as unknown as { message: string;}
+    console.log("From Server to client Msg Rec", msg);
+    const { message } = msg as unknown as { message: string };
     setMessages((prev) => [...prev, message]);
   }, []);
 

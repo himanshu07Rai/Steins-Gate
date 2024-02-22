@@ -1,4 +1,5 @@
 import pgClient from "../services/db";
+import L from "../utils/logger";
 
 const DaoQ = {
     TIMEOUT: 240000, // 4 minutes, https://github.com/mysqljs/mysql#timeouts
@@ -44,8 +45,7 @@ export default class Dao {
             text:sql,
             values
         };
-
-        console.log("query", query);
+        L.info(query);
         try {
             const result = await pgClient.query(query);
             return result.rows;
@@ -64,7 +64,7 @@ export default class Dao {
             text: sql,
             values
         };
-        console.log("query", query);
+        L.info(query);
         try {
             const result = await pgClient.query(query);
             return result.rows[0];
