@@ -14,6 +14,25 @@ export default class Dao {
         this.tableName = tableName;
     }
 
+    async getOneRow({
+        where
+    }:{
+        where: string
+    }) {
+        const sql = `${DaoQ.GET_ALL_ROWS}${this.tableName} WHERE ${where}`;
+        const query = {
+            text: sql
+        };
+        L.info(query);
+        try {
+            const result = await pgClient.query(query);
+            return result.rows[0];
+        } catch (err) {
+            console.error("Error executing query:", err);
+            throw err;
+        }
+    }
+
     async getAllRows({
         where,
         orderBy,
