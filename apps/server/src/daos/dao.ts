@@ -74,11 +74,11 @@ export default class Dao {
         }
     }
 
-    async insertObj(obj: any) {
+    async insertObj(obj: any, returning?: string) {
         const keys = Object.keys(obj);
         const values = Object.values(obj);
         const placeholders = keys.map((k, i) => `$${i + 1}`);
-        const sql = `${DaoQ.INSERT_OBJ}${this.tableName} (${keys.join(", ")}) VALUES (${placeholders.join(", ")})`
+        const sql = `${DaoQ.INSERT_OBJ}${this.tableName} (${keys.join(", ")}) VALUES (${placeholders.join(", ")}) ${returning ? `RETURNING ${returning}` : ''}`;
         const query = {
             text: sql,
             values

@@ -18,3 +18,18 @@
 {"level":"info","message":{"text":"SELECT * FROM user_auth WHERE name = 'admin'"},"timestamp":"2024-02-25T09:41:18.606Z"}
 {"level":"info","message":{"text":"SELECT * FROM user_auth WHERE name = 'admin'"},"timestamp":"2024-02-25T09:41:54.730Z"}
 {"level":"info","message":{"text":"SELECT * FROM message","values":[]},"timestamp":"2024-02-25T09:41:54.740Z"}
+{"level":"info","message":{"text":"SELECT * FROM message","values":[]},"timestamp":"2024-02-25T09:58:20.388Z"}
+{"level":"info","message":{"text":"SELECT * FROM message","values":[]},"timestamp":"2024-02-25T09:58:25.157Z"}
+{"level":"info","message":{"text":"INSERT INTO user_auth (name, password, email) VALUES ($1, $2, $3) RETURNING id, username","values":["archie","$2b$10$coqODqUIMC09nhhU1LvG2OG.1vIIaaglCEum0DS8.2Csr3bzSFOZi","archie@mail.com"]},"timestamp":"2024-02-25T10:07:48.232Z"}
+{"level":"info","message":{"text":"INSERT INTO user_auth (name, password, email) VALUES ($1, $2, $3) RETURNING id, username","values":["archie","$2b$10$ygwZGxjHj/zgv2p8mNr4b.LUgW5GGZR.cI8LyTPhzgjhYsmyQtxvq","archie@mail.com"]},"timestamp":"2024-02-25T10:08:44.004Z"}
+{"level":"info","message":{"text":"INSERT INTO user_auth (name, password, email) VALUES ($1, $2, $3) RETURNING id, name","values":["archie","$2b$10$MT4i3Aofb8Mgl8EiuRWbX.CmDRfEHAAM5.wiVfj77YG073BF9i2J6","archie@mail.com"]},"timestamp":"2024-02-25T10:09:12.486Z"}
+{"level":"info","message":{"text":"INSERT INTO user_auth (name, password, email) VALUES ($1, $2, $3) RETURNING id, name, email, created_at, updated_at","values":["archie","$2b$10$bHFPcnvyLAxvXwWlkB83Puu4lzymMXdJrCkBhnGytN.jAt89asaPu","archie@mail.com"]},"timestamp":"2024-02-25T10:10:10.934Z"}
+{"level":"info","message":{"text":"INSERT INTO user_auth (name, password, email) VALUES ($1, $2, $3) RETURNING id, name, email, created_at, updated_at","values":["archie","$2b$10$x792LoSrCjSgYiPQtDXm1utcCsLU6w36uHGyYS.pY2bQAymxU6J2C","archie@mail.com"]},"timestamp":"2024-02-25T10:10:56.527Z"}
+{"level":"info","message":{"text":"INSERT INTO user_auth (name, password, email) VALUES ($1, $2, $3) RETURNING id, name, email, created_at, updated_at","values":["archie","$2b$10$bLto3s/Kez1QTOCgzRqAJ.KzL8gjDKZxvG2ekTo7Iys.CBey/kQCW","archie@mail.com"]},"timestamp":"2024-02-25T10:13:16.621Z"}
+{"level":"info","message":{"text":"INSERT INTO user_auth (name, password, email) VALUES ($1, $2, $3) RETURNING id, name, email, created_at, updated_at","values":["archie","$2b$10$EviagNYyUrAu8802IdCZgOvQme8iQ5tx74SCxKqreHJJ9pl38KdbG","archie@mail.com"]},"timestamp":"2024-02-25T10:14:31.826Z"}
+{"level":"info","message":{"text":"INSERT INTO user_auth (name, password, email) VALUES ($1, $2, $3) RETURNING id, name, email, created_at, updated_at","values":["archie","$2b$10$8zonI/RFKMzoO3RAp47W.eKbMnSnFVlMbmfW55vBqzuH54u0NWj2y","archie@mail.com"]},"timestamp":"2024-02-25T10:16:22.361Z"}
+{"level":"info","message":{"text":"SELECT * FROM user_auth WHERE email = 'archie@mail.com'"},"timestamp":"2024-02-25T10:19:24.443Z"}
+{"level":"info","message":{"text":"SELECT * FROM user_auth WHERE email = 'archie@mail.com'"},"timestamp":"2024-02-25T10:19:57.758Z"}
+{"level":"info","message":{"text":"SELECT * FROM user_auth WHERE email = 'archie@mail.com'"},"timestamp":"2024-02-25T10:26:34.545Z"}
+{"level":"info","message":{"text":"SELECT * FROM message","values":[]},"timestamp":"2024-02-25T10:26:45.334Z"}
+{"level":"info","message":{"text":"SELECT * FROM message","values":[]},"timestamp":"2024-02-25T10:29:56.332Z"}
