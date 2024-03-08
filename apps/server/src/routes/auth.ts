@@ -8,7 +8,9 @@ const saltRounds = 10;
 
 router.post('/signup', async (req, res) =>{
     try{
-        const {username, password, email, isAdmin} = req.body;
+        console.log({req})
+        const {username, password, email, isAdmin=false} = req.body;
+        console.log({username, password, email, isAdmin})
         // check if username or email already exists
         const user = await userDao.getOneRow({
             where: `username = '${username}' or email = '${email}'`

@@ -1,6 +1,8 @@
 import React from "react";
 import ChatBox from "./components/ChatBox";
 import AllMessages from "./components/AllMessages";
+import { redirect } from "next/navigation";
+import getAuthSession from "../../utils/getAuthSession";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
@@ -13,6 +15,11 @@ const getAllMessages = async () => {
 };
 
 const page = async () => {
+  const session = getAuthSession();
+  if (!session) {
+    redirect("/auth/login");
+  }
+
   const messages = await getAllMessages();
   return (
     <div>

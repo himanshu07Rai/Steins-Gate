@@ -8,12 +8,16 @@ import { requestLog } from "./middlewares/requestLogger";
 import authRouter from "./routes/auth";
 import dotenv from 'dotenv';
 import {checkAuth} from "./middlewares/checkAuth";
+import { attachUser } from "./middlewares/attachUser";
+import { USER_ROLE } from "./utils/constants";
+import cors from "cors"
 dotenv.config();
 
 const app = ExpressConfig();
 const httpServer = http.createServer(app);
 
 app.use(express.static('public'));
+app.use(cors())
 app.use(express.json());
 app.use(requestLog)
 
@@ -25,7 +29,7 @@ socketServer.initListeners();
 startMessageConsumer();
 
 app.use('/api/auth', authRouter);
-app.get('/api/messages', checkAuth,  async (req, res) => {
+app.get('/api/messages',  async (_req: any, res: { json: (arg0: any[]) => void; }) => {
   const messages = await messageDao.getAllRows({});
   res.json(messages);
 })
