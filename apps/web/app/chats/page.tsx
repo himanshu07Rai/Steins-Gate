@@ -16,9 +16,9 @@ const getAllMessages = async () => {
 
 const page = async () => {
   const session = getAuthSession();
-  if (!session) {
-    redirect("/auth/login");
-  }
+  // if (!session) {
+  //   redirect("/auth/login");
+  // }
 
   const messages = await getAllMessages();
   return (

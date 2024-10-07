@@ -142,3 +142,21 @@
 {"level":"info","message":{"text":"SELECT * FROM message","values":[]},"timestamp":"2024-03-08T13:11:52.028Z"}
 {"level":"info","message":{"text":"SELECT * FROM message","values":[]},"timestamp":"2024-03-08T13:11:56.509Z"}
 {"level":"info","message":{"text":"SELECT * FROM message","values":[]},"timestamp":"2024-03-08T13:12:04.008Z"}
+{"level":"info","message":{"text":"SELECT * FROM message","values":[]},"timestamp":"2024-10-07T17:18:11.500Z"}
+{"level":"info","message":{"text":"SELECT * FROM message","values":[]},"timestamp":"2024-10-07T17:18:13.298Z"}
+{"level":"info","message":{"text":"INSERT INTO message (text) VALUES ($1) ","values":["{\"message\":\"hey\"}"]},"timestamp":"2024-10-07T17:18:24.322Z"}
+{"level":"info","message":{"text":"SELECT * FROM message","values":[]},"timestamp":"2024-10-07T17:18:37.345Z"}
+{"level":"info","message":{"text":"INSERT INTO message (text) VALUES ($1) ","values":["{\"message\":\"heyyo\"}"]},"timestamp":"2024-10-07T17:18:56.409Z"}
+{"level":"info","message":{"text":"INSERT INTO message (text) VALUES ($1) ","values":["{\"message\":\"lmao\"}"]},"timestamp":"2024-10-07T17:19:06.725Z"}
+{"level":"info","message":{"text":"INSERT INTO message (text) VALUES ($1) ","values":["{\"message\":\"lmaofsfdsf\"}"]},"timestamp":"2024-10-07T17:19:31.010Z"}
+{"level":"info","message":{"text":"INSERT INTO message (text) VALUES ($1) ","values":["{\"message\":\"lmaofsfdsffdsfdsgdsg\"}"]},"timestamp":"2024-10-07T17:20:28.988Z"}
+{"level":"info","message":{"text":"INSERT INTO message (text) VALUES ($1) ","values":["{\"message\":\"fdsfdsfdsfdsfdsfdsf\"}"]},"timestamp":"2024-10-07T17:20:29.007Z"}
+{"level":"info","message":{"text":"INSERT INTO message (text) VALUES ($1) ","values":["{\"message\":\"\"}"]},"timestamp":"2024-10-07T17:20:46.285Z"}
+{"level":"info","message":{"text":"SELECT * FROM message","values":[]},"timestamp":"2024-10-07T17:20:52.533Z"}
+{"level":"info","message":{"text":"SELECT * FROM message","values":[]},"timestamp":"2024-10-07T17:20:54.158Z"}
+{"level":"info","message":{"text":"SELECT * FROM message","values":[]},"timestamp":"2024-10-07T17:21:07.343Z"}
+{"level":"info","message":{"text":"SELECT * FROM message","values":[]},"timestamp":"2024-10-07T17:21:13.431Z"}
+{"level":"info","message":{"text":"SELECT * FROM message","values":[]},"timestamp":"2024-10-07T17:24:29.622Z"}
+{"level":"info","message":{"text":"SELECT * FROM message","values":[]},"timestamp":"2024-10-07T17:24:45.190Z"}
+{"level":"info","message":{"text":"SELECT * FROM message","values":[]},"timestamp":"2024-10-07T17:24:46.315Z"}
+{"level":"info","message":{"text":"INSERT INTO message (text) VALUES ($1) ","values":["{\"message\":\"gdsfsdf\"}"]},"timestamp":"2024-10-07T17:24:49.887Z"}
