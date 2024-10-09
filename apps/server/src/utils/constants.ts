@@ -3,7 +3,7 @@ export const USER_ROLE = {
     USER: 1,
 } as const;
 
-export const HTTP_HEADER = {AUTH: 'Authorization', USER_AGENT: 'User-Agent'} as const;
+export const HTTP_HEADER = {AUTH: 'authorization', USER_AGENT: 'User-Agent'} as const;
 
 export const AUTH_COOKIE = 'aKookie';
 

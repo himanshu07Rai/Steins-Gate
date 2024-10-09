@@ -21,6 +21,30 @@ model User {
   oauth_id   String?
   image     String?
   created_at DateTime @default(now())
+  Clubs  Club[]
 
   @@map("users")
+}
+
+model Club {
+  id         String       @id @default(uuid()) @db.Uuid
+  user       User         @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id    Int
+  title      String       @db.VarChar(191)
+  passcode   String       @db.VarChar(20)
+  created_at DateTime     @default(now())
+  Mambers ClubMember[]
+
+  @@index([user_id, created_at])
+  @@map("clubs")
+}
+
+model ClubMember {
+  id         Int       @id @default(autoincrement())
+  club      Club @relation(fields: [club_id], references: [id], onDelete: Cascade)
+  club_id   String    @db.Uuid
+  user_id    Int
+  created_at DateTime  @default(now())
+
+  @@map("club_users")
 }
