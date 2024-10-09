@@ -7,14 +7,13 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "../ui/button";
-import Image from "next/image";
 import { signIn } from "next-auth/react";
 import { DialogDescription } from "@radix-ui/react-dialog";
 
 const handleGoogleLogin = async () => {
   signIn("google", {
     redirect: true,
-    callbackUrl: "/",
+    callbackUrl: "/dashboard",
   });
 };
 

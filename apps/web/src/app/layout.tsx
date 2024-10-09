@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import SessionProvider from "@/providers/SessionProvider";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <SessionProvider>
         <body
           className={cn(
@@ -41,7 +42,7 @@ export default function RootLayout({
           )}
         >
           {children}
-          {/* <Toaster richColors duration={5000} /> */}
+          <Toaster richColors duration={5000} />
         </body>
       </SessionProvider>
     </html>
