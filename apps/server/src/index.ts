@@ -3,13 +3,9 @@ import { startMessageConsumer } from "./services/kafka";
 import SocketServer from "./services/socket";
 import express from "express"
 import http from "http"
-import { messageDao } from "./daos/messageDao";
 import { requestLog } from "./middlewares/requestLogger";
-import authRouter from "./routes/auth";
+import authRouter from "./routes";
 import dotenv from 'dotenv';
-import {checkAuth} from "./middlewares/checkAuth";
-import { attachUser } from "./middlewares/attachUser";
-import { USER_ROLE } from "./utils/constants";
 import cors from "cors"
 dotenv.config();
 
@@ -29,10 +25,10 @@ socketServer.initListeners();
 startMessageConsumer();
 
 app.use('/api/auth', authRouter);
-app.get('/api/messages',  async (_req: any, res: { json: (arg0: any[]) => void; }) => {
-  const messages = await messageDao.getAllRows({});
-  res.json(messages);
-})
+// app.get('/api/messages',  async (_req: any, res: { json: (arg0: any[]) => void; }) => {
+//   const messages = await messageDao.getAllRows({});
+//   res.json(messages);
+// })
 
 httpServer.listen(httpPort, () => {
   console.log(`HTTP server is running on http://localhost:${httpPort}`);

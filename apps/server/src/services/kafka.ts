@@ -1,5 +1,5 @@
 import { Kafka, Producer } from 'kafkajs'
-import { messageDao } from '../daos/messageDao';
+// import { messageDao } from '../daos/messageDao';
 
 const kafka = new Kafka({
     brokers: ['localhost:29092']
@@ -37,7 +37,7 @@ export async function produceMessage(message: string) {
         if (!message.value) return;
         console.log(`New Message Recv..`);
         try {
-          await messageDao.insertObj({ text: message.value?.toString() });
+          // await messageDao.insertObj({ text: message.value?.toString() });
         } catch (err) {
           console.log(err,"Something is wrong");
           pause();
