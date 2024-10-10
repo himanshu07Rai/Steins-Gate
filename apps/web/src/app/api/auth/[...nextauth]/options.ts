@@ -29,7 +29,7 @@ export const authOptions: AuthOptions = {
       user: CustomUser;
       account: Account | null;
     }) {
-      console.log({user, account});
+      // console.log({user, account});
       try {
         const payload = {
           email: user.email!,

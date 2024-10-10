@@ -9,9 +9,9 @@ import ClubList from "@/components/dashboard/ClubList";
 
 const Dashboard = async () => {
   const session: CustomSession | null = await getServerSession(authOptions);
-  console.log({ session });
+  // console.log({ session });
   const d = await fetchUserClubs(session?.user?.token!);
-  console.log({ d });
+  // console.log({ d });
   return (
     <>
       <Navbar

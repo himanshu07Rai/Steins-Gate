@@ -5,7 +5,7 @@ class ClubController {
   static async clubsByUser(req: Request, res: Response) {
     try {
       const user = req.user;
-      console.log({user});
+      // console.log({user});
       const groups = await prisma.club.findMany({
         where: {
           user_id: user!.id
@@ -26,12 +26,21 @@ class ClubController {
     try {
       const { id } = req.params;
       if (id) {
-        const group = await prisma.club.findUnique({
+        const club = await prisma.club.findUnique({
           where: {
             id: id,
           },
         });
-        return res.json({ club: group });
+        // club members
+        const clubMembers = await prisma.clubMember.findMany({
+          where: {
+            club_id: id
+          }
+        });
+        return res.json({ club:{
+          ...club,
+          members: clubMembers
+        } });
       }
 
       return res.status(404).json({ message: "No groups found" });
@@ -44,8 +53,6 @@ class ClubController {
 
   static async createClub(req: Request, res: Response) {
     try {
-      console.log(req.body);
-      console.log(req.user);
       const body = req.body;
       const user = req.user;
       const data = {
@@ -53,10 +60,19 @@ class ClubController {
         passcode: body?.passcode,
         user_id: user!.id,
       }
-      console.log(data);
-      await prisma.club.create({
+      const createdClub = await prisma.club.create({
         data
       });
+
+      // console.log({createdClub});
+
+      await prisma.clubMember.create({
+        data: {
+          user_id: user!.id,
+          club_id: createdClub.id
+        }
+      });
+
 
       return res.json({ message: "Chat Group created successfully!" });
     } catch (error) {

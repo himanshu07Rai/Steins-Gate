@@ -20,7 +20,7 @@ export default function ProfileMenu({
   name: string;
 }) {
   const [logoutOpen, setLogoutOpen] = useState(false);
-  console.log("ProfileMenu", logoutOpen);
+  // console.log("ProfileMenu", logoutOpen);
   return (
     <>
       <LogoutModal open={logoutOpen} setOpen={setLogoutOpen} />

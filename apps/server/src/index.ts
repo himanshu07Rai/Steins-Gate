@@ -21,8 +21,8 @@ app.use(requestLog)
 const httpPort = 8080;
 const socketPort = 8081;
 
-// const socketServer = new SocketServer(httpServer);
-// socketServer.initListeners();
+const socketServer = new SocketServer(httpServer);
+socketServer.initListeners();
 // startMessageConsumer();
 
 app.use('/api',attachUser, router);
@@ -35,7 +35,7 @@ httpServer.listen(httpPort, () => {
   console.log(`HTTP server is running on http://localhost:${httpPort}`);
 });
 
-// socketServer.io.listen(socketPort);
+socketServer.io.listen(socketPort);
 
 
 

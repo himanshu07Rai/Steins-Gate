@@ -3,18 +3,18 @@ import http from 'http';
 import Redis from 'ioredis';
 import { produceMessage } from "./kafka";
 
-const pub = new Redis({
-  host: 'localhost',
-  port: 6380,
-  username: "",
-  password: "",
-});
-const sub = new Redis({
-  host: 'localhost',
-  port: 6380,
-  username: "",
-  password: "",
-});
+// const pub = new Redis({
+//   host: 'localhost',
+//   port: 6380,
+//   username: "",
+//   password: "",
+// });
+// const sub = new Redis({
+//   host: 'localhost',
+//   port: 6380,
+//   username: "",
+//   password: "",
+// });
 class SocketServer {
     io: SocketIOServer;
   
@@ -26,7 +26,7 @@ class SocketServer {
           allowedHeaders: '*',
         }
       });
-      sub.subscribe("MESSAGES");
+      // sub.subscribe("MESSAGES");
     }
 
     public initListeners() {
@@ -36,19 +36,19 @@ class SocketServer {
         socket.on('disconnect', () => {
           console.log('User disconnected');
         });
-        socket.on('event:message', async ({message}:{message:string}) => {
+        socket.on('message', async ({message}:{message:string}) => {
             console.log('message received: ' + message);
             // publish this message to redis
-            await pub.publish("MESSAGES", JSON.stringify({ message }));
+            // await pub.publish("MESSAGES", JSON.stringify({ message }));
         });
       });
 
-      sub.on("message", async (channel, message) => {
-        if (channel !== "MESSAGES") return;
-        console.log("new message from redis : " + message);
-        io.emit('message', JSON.parse(message));
-        produceMessage(message);
-      });
+      // sub.on("message", async (channel, message) => {
+      //   if (channel !== "MESSAGES") return;
+      //   console.log("new message from redis : " + message);
+      //   io.emit('message', JSON.parse(message));
+      //   // produceMessage(message);
+      // });
     }
 
     public getIo() {
