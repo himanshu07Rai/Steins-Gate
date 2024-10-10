@@ -32,10 +32,8 @@ app.use('/api',attachUser, router);
 // })
 
 httpServer.listen(httpPort, () => {
-  console.log(`HTTP server is running on http://localhost:${httpPort}`);
+  console.log(`HTTP and WebSocket server is running on http://localhost:${httpPort}`);
 });
-
-socketServer.io.listen(socketPort);
 
 
 
