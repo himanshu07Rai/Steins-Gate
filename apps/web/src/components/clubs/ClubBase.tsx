@@ -23,7 +23,6 @@ const ClubBase = ({
       setChatUser(userData);
     }
   }, [club.id]);
-  console.log({ chatUser });
   return (
     <div>
       {open && (
