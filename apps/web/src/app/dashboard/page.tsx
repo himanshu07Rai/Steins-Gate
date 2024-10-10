@@ -4,14 +4,15 @@ import { authOptions, CustomSession } from "../api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
 import CreateClub from "@/components/clubs/CreateClub";
 import { fetchUserClubs } from "@/fetch/clubs";
-import Card from "@/components/dashboard/Card";
 import ClubList from "@/components/dashboard/ClubList";
+import { notFound, redirect } from "next/navigation";
 
 const Dashboard = async () => {
   const session: CustomSession | null = await getServerSession(authOptions);
-  // console.log({ session });
+  if (!session) {
+    return redirect("/");
+  }
   const d = await fetchUserClubs(session?.user?.token!);
-  // console.log({ d });
   return (
     <>
       <Navbar

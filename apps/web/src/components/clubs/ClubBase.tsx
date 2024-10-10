@@ -1,9 +1,7 @@
-import { getSocket } from "@/lib/socket.config";
-import React, { useEffect, useMemo } from "react";
-import { v4 as uuidv4 } from "uuid";
+"use client";
+import React, { useEffect } from "react";
 import NewClubMember from "./NewClubMember";
 import { ClubType } from "@/lib/types";
-import ClubFeed from "./ClubFeed";
 import Chats from "./Chats";
 
 // connect socker io here
@@ -11,11 +9,9 @@ import Chats from "./Chats";
 const ClubBase = ({
   club,
   oldChats,
-  members,
 }: {
   club: ClubType;
   oldChats: Array<MessageType> | [];
-  members: Array<UserType>;
 }) => {
   const [chatUser, setChatUser] = React.useState(null);
   const [open, setOpen] = React.useState(true);
@@ -27,11 +23,20 @@ const ClubBase = ({
       setChatUser(userData);
     }
   }, [club.id]);
+  console.log({ chatUser });
   return (
     <div>
-      {/* {open && <NewClubMember open={open} setOpen={setOpen} club={club} />} */}
-      <NewClubMember open={open} setOpen={setOpen} club={club} />
-      <Chats club={club} oldMessages={oldChats} chatUser={chatUser} />
+      {open && (
+        <NewClubMember
+          open={open}
+          setOpen={setOpen}
+          club={club}
+          setChatUser={setChatUser}
+        />
+      )}
+      {!open && (
+        <Chats club={club} oldMessages={oldChats} chatUser={chatUser} />
+      )}
     </div>
   );
 };

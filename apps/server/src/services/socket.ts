@@ -3,7 +3,6 @@ import http from 'http';
 import Redis from 'ioredis';
 import { produceMessage } from "./kafka";
 import { instrument } from "@socket.io/admin-ui"
-import prisma from '../config/db.config';
 
 export type MessageType = {
   id: string;
@@ -59,23 +58,20 @@ class SocketServer {
         return next(new Error("invalid room "));
       });
       io.on('connection', (socket: CustomSocket) => {
+        console.log('User connected');
         if(socket.room) socket.join(socket.room);
-        console.log('A user connected ', socket.id, " room: ", socket.room);
         socket.on('disconnect', () => {
           console.log('User disconnected');
         });
-        socket.on('message', async (payload:MessageType) => {
-          console.log('payload ' + JSON.stringify(payload));
-          const {message} = payload
-          await produceMessage(payload);
-            pub.publish("MESSAGES", JSON.stringify({ room: socket.room, message }));
+        socket.on('message', async (message:MessageType) => {
+          await produceMessage(message);
+          await pub.publish("MESSAGES", JSON.stringify(message));
         });
       })
 
       sub.on("message", async (_channel, message) => {
-        const { room, message: msg } = JSON.parse(message);
-        console.log('message received from redis: ' + msg + ' room: ' + room);
-        io.to(room).emit('message', { message: msg });
+        const messageData = JSON.parse(message)
+        io.to(messageData.club_id).emit('message', messageData);
     });
   }
 

@@ -13,23 +13,18 @@ import { useParams } from "next/navigation";
 import { Input } from "../ui/input";
 import { toast } from "sonner";
 import { ClubType } from "@/lib/types";
-
-// type GroupChatType = {
-//   id: string;
-//   user_id: number;
-//   title: string;
-//   passcode: string;
-//   created_at: string;
-// };
+import { clearCache } from "@/actions/clearCache";
 
 const NewClubMember = ({
   open,
   setOpen,
   club,
+  setChatUser,
 }: {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   club: ClubType;
+  setChatUser: Dispatch<SetStateAction<any>>;
 }) => {
   const params = useParams();
   const [state, setState] = useState({
@@ -50,6 +45,7 @@ const NewClubMember = ({
           params["id"] as string,
           JSON.stringify(data?.data)
         );
+        setChatUser(data?.data);
       } catch (error) {
         toast.error("Something went wrong.please try again!");
       }
@@ -59,15 +55,15 @@ const NewClubMember = ({
     } else {
       setOpen(false);
     }
+    clearCache("members");
   };
   return (
     <Dialog open={open}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="text-2xl">Welcome to QuickChat</DialogTitle>
+          <DialogTitle className="text-2xl">Welcome</DialogTitle>
           <DialogDescription>
-            QuickChat makes it effortless to create secure chat links and start
-            conversations in seconds.
+            Please enter your name and passcode to join the club.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit}>

@@ -10,7 +10,7 @@ class ChatsController {
                     club_id: id
                 },
                 orderBy: {
-                    created_at: "desc"
+                    created_at: "asc"
                 }
             });
             return res.json({chats});

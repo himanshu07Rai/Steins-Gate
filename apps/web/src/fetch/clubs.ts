@@ -39,6 +39,9 @@ export async function fetchClubDetails(id: string) {
 export async function fetchClubUsers(id: string) {
   const res = await fetch(`${CLUB_MEMBERS}/${id}`, {
     cache: "no-cache",
+    next: {
+      tags: ["members"],
+    },
   });
 
   if (!res.ok) {

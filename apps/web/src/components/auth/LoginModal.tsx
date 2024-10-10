@@ -21,15 +21,11 @@ export default function LoginModal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Getting start</Button>
+        <Button>Login</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="text-2xl">Welcome to QuickChat</DialogTitle>
-          <DialogDescription>
-            QuickChat makes it effortless to create secure chat links and start
-            conversations in seconds.
-          </DialogDescription>
+          <DialogTitle className="text-2xl">Login to continue</DialogTitle>
         </DialogHeader>
         <Button variant="outline" onClick={handleGoogleLogin}>
           Continue with Google

@@ -31,6 +31,9 @@ class ClubController {
             id: id,
           },
         });
+        if(!club) {
+          return res.status(404).json({ message: "Chat Group not found!" });
+        }
         // club members
         const clubMembers = await prisma.clubMember.findMany({
           where: {
@@ -149,24 +152,6 @@ class ClubController {
     }
   }
 
-  // static async leaveClub(req: Request, res: Response) {
-  //   try {
-  //     const { id } = req.params;
-  //     const user = req.user;
-  //     await prisma.clubMember.deleteMany({
-  //       where: {
-  //         user_id: user!.id,
-  //         club_id: id
-  //       }
-  //     });
-  //     return res.json({ message: "Chat Group left successfully!" });
-  //   } catch (error) {
-  //     return res
-  //       .status(500)
-  //       .json({ message: "Something went wrong.please try again!" });
-  //   }
-  // }
-
   static async getClubMembers(req: Request, res: Response) {
     try {
       const { id } = req.params;
@@ -174,6 +159,9 @@ class ClubController {
         const clubMembers = await prisma.clubMember.findMany({
           where: {
             club_id: id
+          },
+          orderBy:{
+            created_at: "desc"
           }
         });
         return res.json({ members: clubMembers });
