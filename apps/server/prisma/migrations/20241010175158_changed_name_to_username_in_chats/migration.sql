@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "chats" ALTER COLUMN "name" SET DATA TYPE TEXT;

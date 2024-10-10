@@ -3,6 +3,15 @@ import http from 'http';
 import Redis from 'ioredis';
 import { produceMessage } from "./kafka";
 import { instrument } from "@socket.io/admin-ui"
+import prisma from '../config/db.config';
+
+export type MessageType = {
+  id: string;
+  message: string;
+  club_id: string;
+  username: string;
+  created_at: string;
+};
 
 const pub = new Redis({
   host: 'localhost',
@@ -55,8 +64,10 @@ class SocketServer {
         socket.on('disconnect', () => {
           console.log('User disconnected');
         });
-        socket.on('message', async ({message}:{message:string}) => {
-            console.log('message received: ' + message);
+        socket.on('message', async (payload:MessageType) => {
+          console.log('payload ' + JSON.stringify(payload));
+          const {message} = payload
+          await produceMessage(payload);
             pub.publish("MESSAGES", JSON.stringify({ room: socket.room, message }));
         });
       })

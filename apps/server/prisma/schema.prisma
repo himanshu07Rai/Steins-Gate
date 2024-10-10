@@ -34,6 +34,7 @@ model Club {
   passcode   String       @db.VarChar(20)
   created_at DateTime     @default(now())
   Mambers ClubMember[]
+  Chats Chat[]
 
   @@index([user_id, created_at])
   @@map("clubs")
@@ -43,8 +44,21 @@ model ClubMember {
   id         Int       @id @default(autoincrement())
   club      Club @relation(fields: [club_id], references: [id], onDelete: Cascade)
   club_id   String    @db.Uuid
-  user_id    Int
+  username  String
   created_at DateTime  @default(now())
 
-  @@map("club_users")
+  @@map("club_members")
+}
+
+model Chat {
+  id         Int       @id @default(autoincrement())
+  club      Club @relation(fields: [club_id], references: [id], onDelete: Cascade)
+  club_id   String    @db.Uuid
+  username    String
+  message    String
+  created_at DateTime  @default(now())
+
+  @@index([club_id, created_at])
+
+  @@map("chats")
 }

@@ -19,17 +19,20 @@ app.use(express.json());
 app.use(requestLog)
 
 const httpPort = 8080;
-const socketPort = 8081;
 
 const socketServer = new SocketServer(httpServer);
 socketServer.initListeners();
-// startMessageConsumer();
+startMessageConsumer().catch(console.error);
 
-app.use('/api',attachUser, router);
+app.use('/api', router);
 // app.get('/api/messages',  async (_req: any, res: { json: (arg0: any[]) => void; }) => {
 //   const messages = await messageDao.getAllRows({});
 //   res.json(messages);
 // })
+
+app.get('/api', (_req: any, res: { json: (arg0: { message: string; }) => void; }) => {
+  res.json({ message: 'Hello from Express!' });
+} );
 
 httpServer.listen(httpPort, () => {
   console.log(`HTTP and WebSocket server is running on http://localhost:${httpPort}`);

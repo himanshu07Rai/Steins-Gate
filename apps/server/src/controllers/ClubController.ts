@@ -66,12 +66,12 @@ class ClubController {
 
       // console.log({createdClub});
 
-      await prisma.clubMember.create({
-        data: {
-          user_id: user!.id,
-          club_id: createdClub.id
-        }
-      });
+      // await prisma.clubMember.create({
+      //   data: {
+      //     username: user!.username,
+      //     club_id: createdClub.id
+      //   }
+      // });
 
 
       return res.json({ message: "Chat Group created successfully!" });
@@ -113,6 +113,73 @@ class ClubController {
         },
       });
       return res.json({ message: "Chat Deleted successfully!" });
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ message: "Something went wrong.please try again!" });
+    }
+  }
+
+  static async joinClub(req: Request, res: Response) {
+    try {
+      const {
+        club_id,
+        username
+      } = req.body;
+
+      const club = await prisma.club.findUnique({
+        where: {
+          id: club_id
+        }
+      });
+      if(!club) {
+        return res.status(404).json({ message: "Chat Group not found!" });
+      }
+      const member = await prisma.clubMember.create({
+        data: {
+          username,
+          club_id
+        }
+      });
+      return res.json({ data: member });
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ message: "Something went wrong.please try again!" });
+    }
+  }
+
+  // static async leaveClub(req: Request, res: Response) {
+  //   try {
+  //     const { id } = req.params;
+  //     const user = req.user;
+  //     await prisma.clubMember.deleteMany({
+  //       where: {
+  //         user_id: user!.id,
+  //         club_id: id
+  //       }
+  //     });
+  //     return res.json({ message: "Chat Group left successfully!" });
+  //   } catch (error) {
+  //     return res
+  //       .status(500)
+  //       .json({ message: "Something went wrong.please try again!" });
+  //   }
+  // }
+
+  static async getClubMembers(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      if (id) {
+        const clubMembers = await prisma.clubMember.findMany({
+          where: {
+            club_id: id
+          }
+        });
+        return res.json({ members: clubMembers });
+      }
+
+      return res.status(404).json({ message: "No groups found" });
     } catch (error) {
       return res
         .status(500)
