@@ -27,7 +27,7 @@ const Club = async ({
         <div className="text-2xl">Title: {data?.title}</div>
         <div className="text-2xl">Passcode: {data?.passcode}</div>
         <div className="text-2xl">Created at: {data?.created_at}</div>
-        <ClubFeed />
+        <ClubFeed clubId={id} />
       </div>
     </div>
   );

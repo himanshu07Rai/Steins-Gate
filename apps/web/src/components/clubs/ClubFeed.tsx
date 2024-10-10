@@ -1,13 +1,13 @@
-// "use client";
 import { getSocket } from "@/lib/socket.config";
 import React, { useEffect, useMemo } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 // connect socker io here
 
-const ClubFeed = () => {
+const ClubFeed = ({ clubId }: { clubId: string }) => {
   const socket = useMemo(() => {
     const socket = getSocket();
+    socket.auth = { room: clubId };
     socket.connect();
     return socket;
   }, []);

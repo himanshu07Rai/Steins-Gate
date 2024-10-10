@@ -16,6 +16,10 @@ const sub = new Redis({
   username: "",
   password: "",
 });
+
+interface CustomSocket extends Socket {
+    room?: string;
+}
 class SocketServer {
     io: SocketIOServer;
   
@@ -37,25 +41,32 @@ class SocketServer {
 
     public initListeners() {
       const io = this.io;
-      io.on('connection', (socket: Socket) => {
-        console.log('A user connected', socket.id);
+      io.use((socket:CustomSocket, next) => {
+        const room = socket.handshake.auth.room;
+        if (room) {
+          socket.room = room;
+          return next();
+        }
+        return next(new Error("invalid room "));
+      });
+      io.on('connection', (socket: CustomSocket) => {
+        if(socket.room) socket.join(socket.room);
+        console.log('A user connected ', socket.id, " room: ", socket.room);
         socket.on('disconnect', () => {
           console.log('User disconnected');
         });
         socket.on('message', async ({message}:{message:string}) => {
             console.log('message received: ' + message);
-            // publish this message to redis
-            await pub.publish("MESSAGES", JSON.stringify({ message }));
+            pub.publish("MESSAGES", JSON.stringify({ room: socket.room, message }));
         });
-      });
+      })
 
-      sub.on("message", async (channel, message) => {
-        if (channel !== "MESSAGES") return;
-        console.log("new message from redis : " + message);
-        io.emit('message', JSON.parse(message));
-        // produceMessage(message);
-      });
-    }
+      sub.on("message", async (_channel, message) => {
+        const { room, message: msg } = JSON.parse(message);
+        console.log('message received from redis: ' + msg + ' room: ' + room);
+        io.to(room).emit('message', { message: msg });
+    });
+  }
 
     public getIo() {
         return this.io;
