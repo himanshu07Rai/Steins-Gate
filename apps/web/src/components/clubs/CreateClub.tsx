@@ -71,11 +71,7 @@ const CreateClub = ({ user }: { user: CustomUser }) => {
         <DialogHeader>
           <DialogTitle>Create your new Room</DialogTitle>
         </DialogHeader>
-        <form
-          onSubmit={() => {
-            console.log("submit");
-          }}
-        >
+        <form>
           <div className="mt-4">
             <Input placeholder="Enter chat title" {...register("title")} />
             <span className="text-red-400">{errors.title?.message}</span>

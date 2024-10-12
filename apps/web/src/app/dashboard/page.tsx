@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth";
 import CreateClub from "@/components/clubs/CreateClub";
 import { fetchUserClubs } from "@/fetch/clubs";
 import ClubList from "@/components/dashboard/ClubList";
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 
 const Dashboard = async () => {
   const session: CustomSession | null = await getServerSession(authOptions);

@@ -20,6 +20,7 @@ const Club = async ({
   try {
     club = await fetchClubDetails(id);
   } catch (error) {
+    console.error(error);
     return notFound();
   }
   if (!club) {

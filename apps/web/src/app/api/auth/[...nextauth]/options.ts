@@ -76,7 +76,7 @@ export const authOptions: AuthOptions = {
 
   providers: [
     GoogleProvider({
-      clientId: "423221411760-r5do915r88kgm9tembvndh23i8hf1atp.apps.googleusercontent.com",
+      clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
       authorization: {
         params: {
