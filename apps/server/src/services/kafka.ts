@@ -11,7 +11,7 @@ type ChatType = {
 }
 
 const kafka = new Kafka({
-    brokers: ['localhost:29092']
+    brokers: ['kafka:29092']
 })
 
 let producer: null | Producer = null;

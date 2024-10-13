@@ -15,13 +15,8 @@ const Dashboard = async () => {
   const d = await fetchUserClubs(session?.user?.token!);
   return (
     <>
-      <Navbar
-        name={session?.user?.name!}
-        image={session?.user?.image ?? undefined}
-      />
-      <CreateClub user={session?.user!} />
+      <Navbar user={session?.user!} image={session?.user?.image ?? undefined} />
       <ClubList clubs={d} />
-      Dash
     </>
   );
 };

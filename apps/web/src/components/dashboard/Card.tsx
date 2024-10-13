@@ -31,7 +31,7 @@ const Card = ({
       <p className="text-gray-600 mb-1">ID: {club.id}</p>
       <p className="text-gray-600 mb-1">Passcode: {club.passcode}</p>
       <p className="text-gray-400 text-sm">
-        Created At :-{new Date(club.created_at).toDateString()}
+        Created At : {new Date(club.created_at).toDateString()}
       </p>
 
       <div className="mt-4 flex space-x-4">

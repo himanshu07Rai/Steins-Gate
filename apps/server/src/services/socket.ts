@@ -13,14 +13,14 @@ export type MessageType = {
 };
 
 const pub = new Redis({
-  host: 'localhost',
-  port: 6380,
+  host: 'my-redis',
+  port: 6379,
   username: "",
   password: "",
 });
 const sub = new Redis({
-  host: 'localhost',
-  port: 6380,
+  host: 'my-redis',
+  port: 6379,
   username: "",
   password: "",
 });

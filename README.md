@@ -1,99 +1,119 @@
-# Turborepo starter
+# Steps to run this project locally
 
-This is an official starter Turborepo.
+## Project Prerequisites
 
-## Using this example
+To successfully run this project, ensure you have the following prerequisites:
+
+### 1. Docker
+- Install Docker on your machine. Follow the installation guide for your operating system:
+  - **Windows**: [Install Docker Desktop](https://docs.docker.com/desktop/windows/install/)
+  - **macOS**: [Install Docker Desktop](https://docs.docker.com/desktop/mac/install/)
+  - **Linux**: Follow the guide for your specific distribution (e.g., Ubuntu, CentOS):
+    - [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+    - [Install Docker Engine on CentOS](https://docs.docker.com/engine/install/centos/)
+
+### 2. Docker Compose
+- Install Docker Compose. If you're using Docker Desktop, Docker Compose is included by default. Otherwise, follow the installation instructions for Linux:
+  - [Install Docker Compose](https://docs.docker.com/compose/install/)
+
+### 3. Verify Installation
+- After installation, verify that Docker and Docker Compose are installed correctly by running the following commands:
+  ```bash
+  docker --version
+  docker-compose --version
+  ```
+
+## Clone this project
 
 Run the following command:
 
 ```sh
-npx create-turbo@latest
+git clone git@github.com:himanshu07Rai/Steins-Gate.git
 ```
 
-## What's inside?
+- Open the cloned repository locally
 
-This Turborepo includes the following packages/apps:
+## Add Environment Variables
 
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
+```bash
+cd apps/server
+touch .env
 ```
 
-### Develop
+Copy the `server..env.example` file and paste it inside `server/.env` and add `JWT_SECRET`
 
-To develop all apps and packages, run the following command:
-
+```sh
+cd ..
+cd ..
+touch .env.local
 ```
-cd my-turborepo
-pnpm dev
+Copy `web/.env.example`, paste it in `web/.env.local` and add the remaining variables
+
+
+## How to Fetch Google Client ID and Secret
+
+Follow these steps to get your Google Client ID and Secret for OAuth integration:
+
+### 1. Go to Google Cloud Console
+- Open your browser and navigate to [Google Cloud Console](https://console.cloud.google.com/).
+- Log in with your Google account if required.
+
+### 2. Create a New Project
+- In the top bar, click the project dropdown and select **New Project**.
+- Provide a name for your project and select an organization (if necessary).
+- Click **Create**.
+
+### 3. Enable the Google OAuth2.0 API
+- Once your project is created, go to the **API & Services** dashboard.
+- Click on **+ ENABLE APIS AND SERVICES** at the top.
+- Search for **"Google OAuth 2.0"** and select **Google OAuth 2.0 API** from the list.
+- Click **Enable**.
+
+### 4. Create OAuth Consent Screen
+- In the left sidebar, click **OAuth consent screen**.
+- Choose the **External** user type (for public apps) or **Internal** (for organization-only apps).
+- Click **Create**.
+  
+  Fill out the required fields:
+  - **App Name**: The name of your application as it will appear to users.
+  - **User Support Email**: An email where users can contact you for support.
+  - **App Domain** (optional): Your app’s home page, privacy policy, and terms of service (if applicable).
+  - **Authorized Domains**: Add the domain(s) you own that will use OAuth (e.g., your app’s domain).
+  - **Developer Contact Information**: Provide an email where Google can contact you.
+
+- After filling in the details, click **Save and Continue**.
+
+### 5. Create OAuth Credentials (Client ID and Secret)
+- In the left sidebar, go to **Credentials**.
+- Click on **Create Credentials** and select **OAuth 2.0 Client ID**.
+- Choose your **Application Type**:
+  - Select **Web Application** for a web app.
+  - Choose other types (e.g., **Desktop App**) as needed.
+  
+  Fill out the following details:
+  - **Name**: A name for the OAuth client (for your internal reference).
+  - **Authorized redirect URIs**: Add your redirect URIs where Google sends responses after authorization.
+    - Example for local development: `http://localhost:3000/api/auth/callback/google`.
+    - Example for production: `https://yourapp.com/auth/google/callback`.
+
+- Click **Create**.
+
+### 6. Copy Your Google Client ID and Secret
+- Once created, you will be shown your **Client ID** and **Client Secret**.
+- Copy these values and store them securely.
+
+### 7. Use the Client ID and Secret in Your Application
+- Add your Client ID and Secret to your environment variables. For a Next.js project, use a `.env.local` file:
+  ```bash
+  GOOGLE_CLIENT_ID=your-client-id
+  GOOGLE_CLIENT_SECRET=your-client-secret
+  ```
+
+## Run the project locally
+
+```powershell-interactive
+cd ..
+cd ..
+chmod +x run_app.sh
+./run_app.sh
 ```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
-
-# Prisme
-
-- npm install prisma ts-node @types/node -D -w 'apps/server'
-- cd apps/server
-- npx prisma init --datasource-provider postgresql
-- update `DATABASE_URL` IN `.env`
-- create models in `schema.prisma` file
-- npx prisma migrate dev --name init
-
-
-# Postgres
-
-- psql -h localhost -U postgres
-
-# Kafka
-
-- add brokers / servers
