@@ -1,3 +1,6 @@
+# Architecture
+![architecture](./architecture.png)
+
 # Steps to run this project locally
 
 ## Project Prerequisites
